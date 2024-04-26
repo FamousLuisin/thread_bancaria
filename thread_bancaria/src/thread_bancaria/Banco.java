@@ -41,4 +41,25 @@ public class Banco {
 			}
 		}
 	}
+	
+	public void investir(Funcionario funcionario) {
+		this.lock.lock();
+		
+		try {
+			System.out.println(funcionario.getName() + " está investindo");
+			double investimento = funcionario.getContaCorrente().getSaldo() * 0.2; 
+	        funcionario.getContaCorrente().debitar(investimento);
+			funcionario.getContaInvestimento().creditar(investimento);
+		} finally {
+			this.lock.unlock();
+		}
+	}
+
+	public List<Loja> getContasCorporativas() {
+		return contasCorporativas;
+	}
+
+	public void setContasCorporativas(List<Loja> contasCorporativas) {
+		this.contasCorporativas = contasCorporativas;
+	}
 }

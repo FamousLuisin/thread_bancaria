@@ -1,5 +1,6 @@
 package thread_bancaria;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -40,7 +41,27 @@ public class Funcionario extends Thread{
 	}
 	
 	public void realizarInvestimento() {
-		// Não implementado
+		try {
+        	lock.lock();
+        	boolean verificar = true;
+            
+        	while (!isPagamento()) {
+            	verificar = conditional.await(2, TimeUnit.SECONDS);
+            	if (!verificar) {
+					break;
+				}
+            }
+        	if (verificar) {
+        		banco.investir(this);
+			} else {
+				System.out.println(this.getName() + " Não há dinheiro suficiente pra ocê");
+			}
+		
+		} catch (InterruptedException e) {
+	        e.printStackTrace();
+		} finally {
+            lock.unlock();
+        }
 	}
 	
 	public void run(){
