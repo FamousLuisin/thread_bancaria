@@ -11,7 +11,9 @@ public class Cliente extends Thread{
 	
 	@Override
 	public void run() {
-		
+		while (conta.getSaldo() > 0) {
+			banco.comprar(this, 100);
+		}
 	}
 
 	public Conta getConta() {
