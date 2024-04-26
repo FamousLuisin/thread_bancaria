@@ -18,7 +18,7 @@ public class Banco {
 			
 			Loja loja = contasCorporativas.get(indice);
 			
-			System.out.println("Transferencia de " + valor + "R$");
+			System.out.println(cliente.getName() + " - Transferencia de " + valor + "R$");
 			cliente.getConta().debitar(valor);
 			loja.getConta().creditar(valor);
 			
