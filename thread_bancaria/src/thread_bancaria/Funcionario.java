@@ -1,11 +1,18 @@
 package thread_bancaria;
 
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Funcionario extends Thread{
 
 	private Conta contaCorrente;
 	private Conta contaInvestimento;
 	private boolean pagamento = false;
 	private Banco banco;
+	
+	private Lock lock = new ReentrantLock();
+	private final Condition conditional = lock.newCondition();
 	
 	Funcionario(Banco banco){
 		this.banco = banco;
@@ -19,7 +26,16 @@ public class Funcionario extends Thread{
 	}
 	
 	public void pagamentoEfetuado() {
-		// Não implementado
+		lock.lock();
+		
+		try {
+			this.pagamento = true;
+			this.conditional.signal();
+			System.out.println("Enviando o signal para " + this.getName());
+		} finally {
+			lock.unlock();
+		}
+		
 		
 	}
 	
