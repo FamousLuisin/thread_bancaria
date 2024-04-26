@@ -14,3 +14,5 @@
         <br/>
         > Loja 2 pagar um funcionarios
 
+## Java
+- Foi usado nesse programa o JavaSE 21
