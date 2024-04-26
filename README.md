@@ -8,11 +8,10 @@
 - O as possiveis condições são:
     - Funcionario recebe -> 1400R$;
     - Lojas receber em igual (2500.00R$):
-        > Lojas podendo pagar um unico funcionario.
+        - Lojas podendo pagar um unico funcionario.
     - Loja 1 receber mais que loja 2:
-        > Loja 1 pagar dois funcionarios
-        <br/>
-        > Loja 2 pagar um funcionarios
+        - Loja 1 pagar dois funcionarios
+        - Loja 2 pagar um funcionarios
 
 ## Java
 - Foi usado nesse programa o JavaSE 21
