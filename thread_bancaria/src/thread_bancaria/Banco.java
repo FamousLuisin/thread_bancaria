@@ -22,8 +22,23 @@ public class Banco {
 			cliente.getConta().debitar(valor);
 			loja.getConta().creditar(valor);
 			
+			if (loja.getConta().getSaldo()>=1400) {
+				pagarFuncionario(loja);
+			}
 		} finally {
 			lock.unlock();
+		}
+	}
+	
+	public void pagarFuncionario(Loja loja) {
+		for (Funcionario funcionario : loja.getFuncionarios()) {
+			if (!funcionario.isPagamento()) {
+				funcionario.getContaCorrente().creditar(1400);
+				loja.getConta().debitar(1400);
+				System.out.println("Pagando Funcionario");
+				funcionario.pagamentoEfetuado();
+				break;
+			}
 		}
 	}
 }
